@@ -7,7 +7,7 @@ myApp.controller('RentalController', function(RealtyService) {
     rental.rentals = RealtyService.rentals; 
    
     rental.deleteRental = function(rentalId) {
-        RealtyService.deleteRental(rentalId);
+        RealtyService.deleteRental(rentalId);console.log('rental result in service', self.rentals.result);
         console.log('delete');
     }
 

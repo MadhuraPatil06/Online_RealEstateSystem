@@ -7,6 +7,13 @@ const sessions = require('express-session');
 var port = process.env.PORT || 5000;
 var rental = require('./routes/rental.router.js')
 var listing = require('./routes/listing.router.js');
+var oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+}));
 var session ;
 // var user = require("./routes/user.router.js");  
 
@@ -39,6 +46,7 @@ app.listen(port, function() {
 
 //mongoose
 var mongoose = require('mongoose');
+const router = require('./routes/rental.router.js');
 // 27017 is the default mongo port number
 
 mongoose.connection.on('connected', function() {
@@ -59,6 +67,7 @@ app.get("/login", (req, res) => {
 app.post("/login", (req,res) => {
         var enteredEmail = req.body.username;
         var enteredPass = req.body.password;
+        console.log(enteredEmail,enteredPass);
         mongoose.connect('mongodb://localhost:27017/realestate', {
         useNewUrlParser: true,
         useCreateIndex: true,
@@ -66,33 +75,32 @@ app.post("/login", (req,res) => {
         });
   
 // User model
-const User = mongoose.model('admin', {
-    username: { type: String },
-    password: { type: String }
-});
-  
+var Schema = mongoose.Schema;
+var userschema = new Schema({ username: String ,password:  String });
+var User = mongoose.model('user', userschema, 'admin');
+
 User.find({ username: enteredEmail}, function (err, result) {
     if (err){
         console.log(err);
     }
     else{
+        console.log(result);
         if (result.length == 0) res.json( "No such user exists");
             else if (result[0].password != enteredPass) res.json( "Incorrect password" );
             else if (result[0].password == enteredPass) {
                 session=req.session;
-                session.userid= req.body.username ;
-            }
+                session.admin=true; 
+        }
+            res.json("success");
     }
-    res.json("success");
+    
 });         
                    
 });
 
-
-
-
 // Logout functionality
 app.get('/logout',(req,res) => {
+    console.log("logged out");
     req.session.destroy();
     res.redirect('/');
 });

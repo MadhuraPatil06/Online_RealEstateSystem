@@ -19,7 +19,9 @@ myApp.service('RealtyService', function($http) {
     self.getListings = function() {
         return $http.get('/listing').then(function(response) {
             console.log('found listings', response);
-            self.listings = response.data;
+            self.listings.result = response.data.listings;
+            self.listings.admin = response.data.sessions;
+            console.log('listing result in service', self.listings.result);
             return response;
         }).catch(function(err) {
             console.log('get didn\'t work!', err);
@@ -32,7 +34,8 @@ myApp.service('RealtyService', function($http) {
             var rentalToSend = {
                 rent: newListing.cost,
                 sqft: newListing.sqft,
-                city: newListing.city
+                city: newListing.city,
+                pid: newListing.pid
             }
             console.log('it\'s a rental!');
              return $http.post('/rental', rentalToSend).then(function(response) {

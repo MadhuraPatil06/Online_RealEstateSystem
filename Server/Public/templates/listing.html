@@ -7,7 +7,7 @@
         Square Feet: {{listingProperty.sqft}} ft<sup>2</sup> <br>
         City: {{listingProperty.city}} <br>
         PropertyId : {{listingProperty.pid}} <br>
-        <button ng-click="listing.enquireListing(listingProperty._id)" class="btn btn-danger">Enquire</button>
+        <button class="btn btn-danger"><a href = "../contactus.html">Enquire</a></button>
         <button ng-click="listing.deleteListing(listingProperty._id)" class="btn btn-danger" ng-show="listing.listings.admin">Delete Listing</button>
     </div>
 </div>

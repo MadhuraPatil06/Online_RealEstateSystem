@@ -15,7 +15,7 @@ app.use(sessions({
     resave: false
 }));
 var session ;
-// var user = require("./routes/user.router.js");  
+
 
 var mongoURI = '';
 // process.env.MONGODB_URI will only be defined if you

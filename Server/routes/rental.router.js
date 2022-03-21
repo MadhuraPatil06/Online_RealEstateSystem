@@ -6,14 +6,32 @@ var Schema = mongoose.Schema;
 var rentalSchema = new Schema({rent: Number, sqft: Number, city: String,  pid: Number , _v: Number ,});
 var Rental = mongoose.model('Rental', rentalSchema, 'rentals');
 
+const sessions = require('express-session');
+
+var oneDay = 1000 * 60 * 60 * 24;
+router.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+}));
+var session ;
+
 //GET route
 router.get('/', function(req, res) {
+    var returnObj = {};
+    session = req.session;
+    console.log(session);
+    returnObj.sessions = session.admin ? session.admin : null;
     Rental.find({} , null, {sort: {rent: +1}},  function(err, foundRentals) {
         if (err) {
             console.log('Error: ', err);
             res.sendStatus(500);
         } else {
-            res.send(foundRentals);
+            returnObj.listings = foundRentals;
+            console.log(returnObj);
+            res.json(returnObj);
+            // res.send(foundRentals);
             console.log('get route worked');
             }
         }); //end FIND

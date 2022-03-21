@@ -16,6 +16,7 @@ router.use(sessions({
     resave: false
 }));
 var session ;
+
 //GET route
 router.get('/', function(req, res) {
     var returnObj = {};

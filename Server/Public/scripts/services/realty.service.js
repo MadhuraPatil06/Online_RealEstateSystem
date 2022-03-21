@@ -7,8 +7,9 @@ myApp.service('RealtyService', function($http) {
 
     self.getRentals = function() {
         return $http.get('/rental').then(function(response) {
-            console.log('found rentals', response.data);
-            self.rentals.result = response.data;
+            console.log('found rentals', response);
+            self.rentals.result = response.data.listings;
+            self.rentals.admin = response.data.sessions;
             console.log('rental result in service', self.rentals.result);
             return response;
         }).catch(function(err) {
@@ -49,7 +50,8 @@ myApp.service('RealtyService', function($http) {
             var listingToSend = {
                 cost: newListing.cost,
                 sqft: newListing.sqft,
-                city: newListing.city
+                city: newListing.city,
+                pid: newListing.pid
             }
             console.log('it\'s for sale!', listingToSend);
             return $http.post('/listing', listingToSend).then(function(response) {
@@ -74,27 +76,6 @@ myApp.service('RealtyService', function($http) {
             console.log('Failure!');
         });
     }
-
-    self.enquireListing = function(listingId) {
-        return $http.delete('/listing/' + listingId).then(function (response) {
-            console.log('Success!');
-            self.getListings();
-            return response;
-        }).catch(function (error) {
-            console.log('Failure!');
-        });
-    }
-
-    self.enquireRental = function(listingId) {
-        return $http.delete('/rental/' + rentalId).then(function (response) {
-            console.log('Success!');
-            self.getRentals();
-            return response;
-        }).catch(function (error) {
-            console.log('Failure!');
-        });
-    }
-
 
     self.deleteRental = function(rentalId) {
         return $http.delete('/rental/' + rentalId).then(function (response) {

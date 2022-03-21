@@ -57,26 +57,35 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req,res) => {
-
-    mongoose.connect(url, function(err, db) {
-        if (err) throw err;
-        var enteredEmail = req.body.email;
+        var enteredEmail = req.body.username;
         var enteredPass = req.body.password;
-        var dbo = db.db("realestate");
-        dbo.collection("admin").find({ _id : enteredEmail }).toArray( (err, result) => {
-            if (err) throw err;
-            
-            if (result.length == 0) res.json( "No such user exists");
+        mongoose.connect('mongodb://localhost:27017/realestate', {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+        });
+  
+// User model
+const User = mongoose.model('admin', {
+    username: { type: String },
+    password: { type: String }
+});
+  
+User.find({ username: enteredEmail}, function (err, result) {
+    if (err){
+        console.log(err);
+    }
+    else{
+        if (result.length == 0) res.json( "No such user exists");
             else if (result[0].password != enteredPass) res.json( "Incorrect password" );
             else if (result[0].password == enteredPass) {
                 session=req.session;
-                session.userid=[req.body.email, result[0].premium] ;
+                session.userid= req.body.username ;
             }
-            db.close();
-            res.json("success");
-        })
-        
-    });
+    }
+    res.json("success");
+});         
+                   
 });
 
 

@@ -13,11 +13,11 @@
                 <h4 class="animation a2">Log In to your Account using Email and Password</h4>
               </div>
               <form name = "form" class="form">
-                <input type="email" placeholder="Email Address" id="email" class="form-field animation a3" ng-model="email" name="email" ng-required="true" ng-pattern="/^[a-z0-9/_$#%]+@[a-z]+[.]+[a-z]+$/" autofocus>
+                <input type="text" placeholder="username" id="email" class="form-field animation a3" ng-model="username" name="email" ng-required="true"  autofocus>
                   <small class="error" ng-if="form.email.$touched && form.email.$error.pattern"><br />Email has to be in format abc@gmail.com</small>
                 <br>
 
-                <input type="password" placeholder="Password" name="pass" class="form-field animation a4" id="pass" ng-model="pass" ng-required="true" ng-minlength="7" ng-maxlength="15" ng-pattern="/^(?=.*[a-zA-Z])(?=.*[@!#$%\^])(?=.*[0-9]).*$/">
+                <input type="password" placeholder="Password" name="pass" class="form-field animation a4" id="pass" ng-model="password" ng-required="true"  >
                   <small class="error" ng-if="form.pass.$touched && form.pass.$error.required"><br>Password is required</small>
                   <small class="error" ng-if="form.pass.$error.minlength || form.pass.$error.maxlength"><br>Password can be minimum 7 characters max 15 characters.</small>
                   <small class="error" ng-if="form.pass.$error.pattern"><br>Password should have atleast 1 number, 1 capital letter and 1 special character</small>
@@ -37,8 +37,8 @@
               $scope.submit = function(){
               
                 var data = {
-                  'email' : $scope.email,
-                  'password' : $scope.pass,
+                  'username' : $scope.username,
+                  'password' : $scope.password,
                 };
                 console.log(data);
           

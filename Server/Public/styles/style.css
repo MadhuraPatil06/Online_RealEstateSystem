@@ -1,0 +1,88 @@
+body {
+    background-image: url("skyscraper.jpg");
+    background-color: #26282b;
+    color: white;
+    font-family: 'Lato', sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    background-color: #90b8f8;
+    z-index: 1000;
+    border-bottom: 7px solid darkblue;
+    width: 100%;
+
+}
+
+#houseIcon {
+    height: 100px;
+    width: auto;
+    margin: 10px;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.viewLinks {
+    display: flex;
+    justify-content: center;
+    padding: 130px 10px 10px 10px;
+    font-size: 25px;
+}
+
+.linkButton {
+    margin: 0px 20px;
+    background-color: rgb(11, 11, 109);
+}
+
+.link, a:hover, a:active, a:visited {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.addListing {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color: black;
+}
+
+.addListingDiv {
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h2 {
+    padding: 5px 15px;
+    text-align: left;
+    font-size: 40px;
+}
+
+.forSale, .forRent {
+    height: 200px;
+    width: 350px;
+    background-color: #5f85db;
+    background-position: left top;
+    margin: 20px;
+    border-radius: 10px;
+    border: 3px solid black;
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+    text-align: center;
+}
+
+.forRent {
+    background-color: #5f85db;
+    background-position: left top;
+}

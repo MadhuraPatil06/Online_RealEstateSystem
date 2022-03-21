@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vendors/angular.js"></script>
+    <script src="vendors/angular-route.min.js"></script>
+    <script src="vendors/sweetalert.min.js"></script>
+    <script src="scripts/client.js"></script>
+    <script src="scripts/controllers/rental.controller.js"></script>
+    <script src="scripts/controllers/listing.controller.js"></script>
+    <script src="scripts/controllers/index.controller.js"></script>
+    <script src="scripts/services/realty.service.js"></script>
+    <link rel="stylesheet" href="vendors/css/bootstrap.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <title>AWP Project Sem 6</title>
+</head>
+
+<body ng-app="myApp" ng-controller="IndexController as index">
+    <div class="header">
+        <div>
+            <img id="houseIcon" src="styles/house-icon.png" alt="house icon">
+        </div>
+        <h1>SSS Realty</h1>
+    </div>
+    <div class="container">
+        <div class="viewLinks">
+            <button class="btn btn-primary linkButton">
+                <a class="link" href="/#!/rental">View Properties for Rent</a>
+            </button>
+            <button class="btn btn-primary linkButton">
+                <a class="link" href="/#!/listing">View Properties for Sale</a>
+            </button>
+            <button class="btn btn-primary linkButton">
+                <a class="link" href="/login.html">Login</a>
+            </button>
+            <button class="btn btn-primary linkButton">
+                <a class="link" href="/contactus.html">Contact Us</a>
+            </button>
+        </div>
+        <div class="addListing">
+            <div class="addListingDiv">
+                <h2>Add a Listing!</h2>
+                <form ng-submit="index.addListing(index.newListing)">
+                    <label for="listingType">Listing Type</label>
+                    <select ng-model="index.newListing.type" id="listingType">
+                        <option value="Rent">Property for Rent</option>
+                        <option value="Cost">Property for Sale</option>
+                    </select>
+                    <label for="cost">Rent </label>
+                    <input type="text" ng-model="index.newListing.cost" id="cost" placeholder={{index.newListing.type}} />
+                    <label for="sqft">Square Feet </label>
+                    <input type="text" ng-model="index.newListing.sqft" id="sqft" placeholder="Square Feet" />
+                    <label for="city">City: </label>
+                    <input type="text" ng-model="index.newListing.city" id="city" placeholder="City" />
+                    <label for="pid">Property Id: </label>
+                    <input type="text" ng-model="index.newListing.pid" id="pid" placeholder="Property Id" />
+                    <button class="btn btn-primary">Add Listing</button>
+                </form>
+            </div>
+        </div>
+
+        <main ng-view></main>
+    </div>
+</body>
+
+</html>

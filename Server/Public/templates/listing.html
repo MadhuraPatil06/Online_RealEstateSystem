@@ -1,0 +1,14 @@
+<div>
+    <h2>Properties For Sale</h2>
+    <div class="row">
+    <div class ="col-md-3 col-sm-3 col-lg-3 col-xs-2 forSale" 
+    ng-repeat="listingProperty in listing.listings">
+        Cost: {{listingProperty.cost | currency}} <br>
+        Square Feet: {{listingProperty.sqft}} ft<sup>2</sup> <br>
+        City: {{listingProperty.city}} <br>
+        PropertyId : {{listingProperty.pid}} <br>
+        <button ng-click="listing.enquireListing(listingProperty._id)" class="btn btn-danger">Enquire</button>
+        <button ng-click="listing.deleteListing(listingProperty._id)" class="btn btn-danger">Delete Listing</button>
+    </div>
+</div>
+</div>

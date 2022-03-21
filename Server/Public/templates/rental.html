@@ -1,0 +1,17 @@
+<div>
+    <h2>Properties For Rent</h2>
+    <div class="row">
+        <div class ="col-md-3 col-sm-2 col-lg-3 forRent" 
+        ng-repeat="rentalProperty in rental.rentals.result">
+            Rent: {{rentalProperty.rent | currency}} <br>
+            Square Feet: {{rentalProperty.sqft}} ft<sup>2</sup> <br>
+            City: {{rentalProperty.city}} <br>
+            PropertyId : {{rentalProperty.pid}} <br>
+            <button ng-click="rental.deleteRental(rentalProperty._id)" class="btn btn-danger">Enquire</button>
+            <button ng-click="rental.deleteRental(rentalProperty._id)" class="btn btn-danger">Delete Rental</button>
+        </div>
+    </div>
+   
+
+
+</div>

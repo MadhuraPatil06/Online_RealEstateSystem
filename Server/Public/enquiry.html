@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <style type="text/css">
+     table, td, th {  
+     border: 1px solid #ddd;
+     text-align: left;
+   }
+   
+   table {
+     border-collapse: collapse;
+     width: 50%;
+    
+   }
+   .table-data{
+       position: relative;
+     left:50px;
+     top:50px;
+   }
+   th, td {
+     padding: 15px;
+   }
+ </style>
+</head>
+<body ng-app = "myApp" ng-controller = "MyController">
+    <div class="table-data">
+    <table border="1">
+        <tr>
+            <th>Email Address</th>
+            <th>Property Id</th>
+            <th>comment</th>
+        </tr>
+        <tr ng-repeat="enquiry in enquiries">
+            <td>{{enquiry.email}}</td>
+            <td>{{enquiry.pid}}</td>
+            <td>{{enquiry.comment}}</td>
+        </tr>        
+    </table>
+    </div>
+</body>
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller("MyController", function($scope, $http)
+    {
+  
+                $http({
+            method : "GET",
+            url : "/enquiry"
+        })
+        .success(function (data, status, headers, config) {
+            console.log("data returned " ,data);
+            $scope.enquiries = data;
+        })
+        .error(function (data, status, header, config) {
+            $scope.ResponseDetails = "Data: " + data +
+                "<hr />status: " + status +
+                "<hr />headers: " + header +
+                "<hr />config: " + config;
+
+        });
+    });
+  </script>
+</html>

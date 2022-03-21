@@ -12,39 +12,100 @@
     </head>
     <body>
         
-<form action="//submit.form" id="ContactUs100" method="post" onsubmit="return ValidateForm(this);">
+<form action="/enquire"  method="post" >
     <script type="text/javascript">
-    function ValidateForm(frm) {
-    if (frm.Name.value == "") { alert('Name is required.'); frm.Name.focus(); return false; }
-    if (frm.FromEmailAddress.value == "") { alert('Email address is required.'); frm.FromEmailAddress.focus(); return false; }
-    if (frm.FromEmailAddress.value.indexOf("@") < 1 || frm.FromEmailAddress.value.indexOf(".") < 1) { alert('Please enter a valid email address.'); frm.FromEmailAddress.focus(); return false; }
-    if (frm.Comments.value == "") { alert('Please enter comments or questions.'); frm.Comments.focus(); return false; }
-    return true; }
+    // function ValidateForm(frm) {
+    // if (frm.Name.value == "") { alert('Name is required.'); frm.Name.focus(); return false; }
+    // if (frm.FromEmailAddress.value == "") { alert('Email address is required.'); frm.FromEmailAddress.focus(); return false; }
+    // if (frm.FromEmailAddress.value.indexOf("@") < 1 || frm.FromEmailAddress.value.indexOf(".") < 1) { alert('Please enter a valid email address.'); frm.FromEmailAddress.focus(); return false; }
+    // if (frm.Comments.value == "") { alert('Please enter comments or questions.'); frm.Comments.focus(); return false; }
+    // return true; }
     </script>
     <h2>Contact SSS Realty</h2>
     <table style="width:100%; max-width:550px;border:0;" cellpadding="10"; cellspacing="5"; >
+    <tr> 
+        <td>
+        <label for="name">Name*:</label>
+        </td><td>
+        <input name="Name" ng-model="name" type="text" maxlength="60" style="width:100%;max-width:250px;" />
+        </td> 
+    </tr> 
+    <tr> 
+        <td>
+        <label for="PhoneNumber">Phone number:</label>
+        </td><td>
+        <input name="PhoneNumber" ng-model="phone" type="text" maxlength="43" style="width:100%;max-width:250px;" />
+        </td> 
+    </tr> 
+    <tr> 
+        <td>
+        <label for="email">Email address*:</label>
+        </td><td>
+        <input name="email" ng-model="email" type="text" maxlength="90" style="width:100%;max-width:250px;" />
+        </td> 
+    </tr> 
+    <tr> 
+        <td>
+        <label for="pid">Property Id:</label>
+        </td><td>
+        <input name="pid" ng-model="pid" type="number" maxlength="10" style="width:100%;max-width:250px;" />
+        </tr>
+    </tr>
+    <tr>
+        <td>
+        <label for="comment">Comments*:</label>
+        </td> <td>
+        <textarea ng-model="comment" name="comment" rows="7" cols="40" style="width:100%;max-width:350px;"></textarea>
+        </td> 
+    </tr> 
     <tr> <td>
-    <label for="Name">Name*:</label>
-    </td> <td>
-    <input name="Name" type="text" maxlength="60" style="width:100%;max-width:250px;" />
-    </td> </tr> <tr> <td>
-    <label for="PhoneNumber">Phone number:</label>
-    </td> <td>
-    <input name="PhoneNumber" type="text" maxlength="43" style="width:100%;max-width:250px;" />
-    </td> </tr> <tr> <td>
-    <label for="FromEmailAddress">Email address*:</label>
-    </td> <td>
-    <input name="FromEmailAddress" type="text" maxlength="90" style="width:100%;max-width:250px;" />
-    </td> </tr> <tr> <td>
-    <label for="Comments">Comments*:</label>
-    </td> <td>
-    <textarea name="Comments" rows="7" cols="40" style="width:100%;max-width:350px;"></textarea>
-    </td> </tr> <tr> <td>
     * - required fields
-    </td> <td>
-    <input name="skip_Submit" type="submit" style="color: black;" value="Submit" />
+    </td> 
+    <td>
+    <input name="skip_Submit" type="submit" ng-click="submit()" style="color: black;" value="Submit" />
     </td> </tr>
     </table>
     </form>
     </body>
+    <script>
+        var app = angular.module('myApp',[]);
+        app.controller("MyController", function($scope, $http)
+        {
+          $scope.submit = function(){
+          
+            var data = {
+              'name' : $scope.name,
+              'phone' : $scope.phone,
+              'email' : $scope.email,
+              'pid' : $scope.pid,              
+              'comment' : $scope.comment
+            };
+            console.log(data);
+      
+            var config = { headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;' }};
+
+            $http({
+                method : "POST",
+                url : "/enquire",
+                data : data
+            })
+            .success(function (data, status, headers, config) {
+                console.log("data returned " ,data);
+                if (data == "success") {
+                  window.location.href = "/";
+                }else {
+                  alert(data)
+                }
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+            });
+
+
+          }
+        });
+      </script>
 </html>

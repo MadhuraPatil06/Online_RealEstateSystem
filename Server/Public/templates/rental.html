@@ -1,3 +1,15 @@
+<button class="btn btn-primary linkButton" ng-hide="rental.rentals.admin" >
+    <a class="link" href="/login.html">Login</a>
+</button>
+<button class="btn btn-primary linkButton" ng-show="rental.rentals.admin" >
+    <a class="link" href="/logout">Logout</a>
+</button>
+<button class="btn btn-primary linkButton" ng-show="rental.rentals.admin">
+    <a class="link" href="/enquiry.html">Show enquiry</a>
+</button>
+<button class="btn btn-primary linkButton" ng-hide="rental.rentals.admin">
+    <a class="link" href="/contactus.html">Contact Us</a>
+</button>
 <div>
     <h2>Properties For Rent</h2>
     <div class="row">
@@ -8,7 +20,7 @@
             City: {{rentalProperty.city}} <br>
             PropertyId : {{rentalProperty.pid}} <br>
             <button class="btn btn-danger"><a href = "../contactus.html">Enquire</a></button>
-            <button ng-click="rental.deleteRental(rentalProperty._id)" class="btn btn-danger">Delete Rental</button>
+            <button ng-click="rental.deleteRental(rentalProperty._id)" class="btn btn-danger" ng-show="rental.rentals.admin">Delete Rental</button>
         </div>
     </div>
    

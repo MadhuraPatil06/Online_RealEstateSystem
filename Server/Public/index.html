@@ -26,24 +26,28 @@
         </div>
         <h1>SSS Realty</h1>
     </div>
-    <div class="container">
-        <div class="viewLinks">
-            <button class="btn btn-primary linkButton">
-                <a class="link" href="/#!/rental">View Properties for Rent</a>
-            </button>
-            <button class="btn btn-primary linkButton">
-                <a class="link" href="/#!/listing">View Properties for Sale</a>
-            </button>
-            <button class="btn btn-primary linkButton" >
-                <a class="link" href="/login.html">Login</a>
-            </button>
-            <button class="btn btn-primary linkButton" >
-                <a class="link" href="/logout">Logout</a>
-            </button>
-            <button class="btn btn-primary linkButton">
-                <a class="link" href="/contactus.html">Contact Us</a>
-            </button>
+    <div class="addListing">
+            <div class="addListingDiv">
+                <h2>Add a Listing!</h2>
+                <form ng-submit="index.addListing(index.newListing)">
+                    <label for="listingType">Listing Type</label>
+                    <select ng-model="index.newListing.type" id="listingType">
+                        <option value="Rent">Property for Rent</option>
+                        <option value="Cost">Property for Sale</option>
+                    </select>
+                    <label for="cost">Rent </label>
+                    <input type="text" ng-model="index.newListing.cost" id="cost" placeholder={{index.newListing.type}} />
+                    <label for="sqft">Square Feet </label>
+                    <input type="text" ng-model="index.newListing.sqft" id="sqft" placeholder="Square Feet" />
+                    <label for="city">City: </label>
+                    <input type="text" ng-model="index.newListing.city" id="city" placeholder="City" />
+                    <label for="pid">Property Id: </label>
+                    <input type="text" ng-model="index.newListing.pid" id="pid" placeholder="Property Id" />
+                    <button class="btn btn-primary">Add Listing</button>
+                </form>
+            </div>
         </div>
+    <div class="container">
         <div class="addListing">
             <div class="addListingDiv">
                 <h2>Add a Listing!</h2>
@@ -65,7 +69,14 @@
                 </form>
             </div>
         </div>
-
+        <div class="viewLinks">
+            <button class="btn btn-primary linkButton">
+                <a class="link" href="/#!/rental">View Properties for Rent</a>
+            </button>
+            <button class="btn btn-primary linkButton">
+                <a class="link" href="/#!/listing">View Properties for Sale</a>
+            </button>
+        </div>
         <main ng-view></main>
     </div>
 </body>
